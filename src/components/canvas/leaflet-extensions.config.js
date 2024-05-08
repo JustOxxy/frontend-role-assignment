@@ -1,4 +1,4 @@
-import * as Leaflet from 'leaflet';
+import * as Leaflet from "leaflet";
 
 export default function ExtendLeafletPrototypes() {
     Leaflet.FabricLayer = LeafletFabricLayer;
@@ -39,6 +39,9 @@ export const LeafletFabricLayer = (
         const topLeft = this._map.containerPointToLayerPoint([0, 0]);
         Leaflet.DomUtil.setPosition(this._fabricCanvas.upperCanvasEl, topLeft);
         Leaflet.DomUtil.setPosition(this._fabricCanvas.lowerCanvasEl, topLeft);
+
+        const del = this._delegate || this;
+        del.onLayerDidMove && del.onLayerDidMove();
     },
 
     getEvents: function () {
@@ -55,7 +58,7 @@ export const LeafletFabricLayer = (
 
     onAdd: function (map) {
         this._map = map;
-        this._canvas = Leaflet.DomUtil.create('canvas', 'leaflet-layer');
+        this._canvas = Leaflet.DomUtil.create("canvas", "leaflet-layer");
         this.tiles = {};
 
         const size = this._map.getSize();
@@ -66,7 +69,7 @@ export const LeafletFabricLayer = (
             this._map.options.zoomAnimation && Leaflet.Browser.any3d;
         Leaflet.DomUtil.addClass(
             this._canvas,
-            'leaflet-zoom-' + (animated ? 'animated' : 'hide')
+            "leaflet-zoom-" + (animated ? "animated" : "hide")
         );
 
         map._panes.overlayPane.appendChild(this._canvas);
@@ -98,9 +101,9 @@ export const LeafletFabricLayer = (
 
         eLeaflet.style[Leaflet.DomUtil.TRANSFORM] =
             (Leaflet.Browser.ie3d
-                ? 'translate(' + pos.x + 'px,' + pos.y + 'px)'
-                : 'translate3d(' + pos.x + 'px,' + pos.y + 'px,0)') +
-            (scale ? ' scale(' + scale + ')' : '');
+                ? "translate(" + pos.x + "px," + pos.y + "px)"
+                : "translate3d(" + pos.x + "px," + pos.y + "px,0)") +
+            (scale ? " scale(" + scale + ")" : "");
     },
 
     _animateZoom: function (e) {

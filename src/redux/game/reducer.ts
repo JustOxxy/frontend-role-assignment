@@ -57,11 +57,22 @@ export const gameSlice = createSlice({
             newPlayers.push(player);
             state.data = newPlayers;
         },
+        deletePlayerAction: (
+            state: GameState,
+            { payload: id }: PayloadAction<number>
+        ) => {
+            const newPlayers = state.data.filter((player) => player.id !== id);
+            state.data = newPlayers;
+        },
         setShowLocationsAction: (state: GameState) => {
             state.showLocations = !state.showLocations;
         },
     },
 });
 
-export const { getAddPlayerAction, setShowLocationsAction } = gameSlice.actions;
+export const {
+    getAddPlayerAction,
+    deletePlayerAction,
+    setShowLocationsAction,
+} = gameSlice.actions;
 export default gameSlice.reducer;

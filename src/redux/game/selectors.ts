@@ -1,3 +1,11 @@
-import { RootState } from '../store';
+import { createSelector } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
-export const getGamePlayers = (state: RootState) => state.game.data;
+const gamePlayers = (state: RootState) => state.game.data;
+
+export const getShowLocations = (state: RootState) => state.game.showLocations;
+
+export const getGamePlayers = createSelector(
+    [getShowLocations, gamePlayers],
+    (showLocations, players) => (showLocations ? players : [])
+);

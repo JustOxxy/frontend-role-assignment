@@ -1,51 +1,52 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { GameState, Player } from './types';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { GameState, Player } from "./types";
 
 const gameInitialState: GameState = {
     data: [
         {
             id: 1,
-            name: 'John',
+            name: "John",
             position: { latitude: 55.6737042, longitude: 12.5678997 },
-            teamName: 'blue',
+            teamName: "blue",
         },
         {
             id: 2,
-            name: 'Alice',
+            name: "Alice",
             position: { latitude: 55.673515, longitude: 12.571688 },
-            teamName: 'red',
+            teamName: "red",
         },
         {
             id: 3,
-            name: 'Mike',
+            name: "Mike",
             position: { latitude: 55.67225, longitude: 12.568748 },
-            teamName: 'blue',
+            teamName: "blue",
         },
         {
             id: 4,
-            name: 'Emily',
+            name: "Emily",
             position: { latitude: 55.6739968, longitude: 12.5669268 },
-            teamName: 'red',
+            teamName: "red",
         },
         {
             id: 5,
-            name: 'David',
+            name: "David",
             position: { latitude: 55.673518, longitude: 12.570086 },
-            teamName: 'blue',
+            teamName: "blue",
         },
         {
             id: 6,
-            name: 'Sarah',
+            name: "Sarah",
             position: { latitude: 55.674552, longitude: 12.5671015 },
-            teamName: 'red',
+            teamName: "red",
         },
     ],
+    showLocations: false,
 };
 
 export const GET_PLAYERS = `game/getGameAction`;
 
 export const gameSlice = createSlice({
-    name: 'game',
+    name: "game",
     initialState: gameInitialState,
     reducers: {
         getAddPlayerAction: (
@@ -56,8 +57,11 @@ export const gameSlice = createSlice({
             newPlayers.push(player);
             state.data = newPlayers;
         },
+        setShowLocationsAction: (state: GameState) => {
+            state.showLocations = !state.showLocations;
+        },
     },
 });
 
-export const { getAddPlayerAction } = gameSlice.actions;
+export const { getAddPlayerAction, setShowLocationsAction } = gameSlice.actions;
 export default gameSlice.reducer;

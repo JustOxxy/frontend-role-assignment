@@ -1,7 +1,7 @@
-import { configureStore } from '@reduxjs/toolkit';
-import createSagaMiddleware from 'redux-saga';
-import gameReducer from './game/reducer';
-import { GameState } from './game/types';
+import { configureStore } from "@reduxjs/toolkit";
+import createSagaMiddleware from "redux-saga";
+import gameReducer from "./game/reducer";
+import { GameState } from "./game/types";
 
 const sagaMiddleware = createSagaMiddleware();
 

@@ -1,7 +1,7 @@
-import { render } from '@testing-library/react';
-import * as Leaflet from 'leaflet';
+import * as Leaflet from "leaflet";
+import { renderWithProviders } from "../../helpers/testsProvidersRender";
 
-jest.mock('fabric', () => ({
+jest.mock("fabric", () => ({
     fabric: {
         Canvas: jest.fn().mockImplementation(() => ({
             requestRenderAll: jest.fn(),
@@ -17,24 +17,24 @@ const leafletFabricLayerMock = jest.fn().mockImplementation(() => ({
 }));
 
 // Mock Leaflet and fabric modules
-jest.doMock('./leaflet-extensions.config', () => ({
+jest.doMock("./leaflet-extensions.config", () => ({
     LeafletFabricLayer: leafletFabricLayerMock,
 }));
 
-const Canvas = require('./Canvas').default;
+const Canvas = require("./Canvas").default;
 
-describe('Canvas', () => {
-    it('returns null', () => {
-        const { container } = render(
+describe("Canvas", () => {
+    it("returns null", () => {
+        const { container } = renderWithProviders(
             <Canvas map={jest.fn() as unknown as Leaflet.Map} />
         );
         expect(container.firstChild).toBeNull();
     });
 
-    it('initializes fabric layer', () => {
+    it("initializes fabric layer", () => {
         const map = jest.fn() as unknown as Leaflet.Map;
 
-        render(<Canvas map={map} />);
+        renderWithProviders(<Canvas map={map} />);
 
         expect(leafletFabricLayerMock).toHaveBeenCalledTimes(1);
         expect(leafletFabricLayerMock).toHaveBeenCalledWith();

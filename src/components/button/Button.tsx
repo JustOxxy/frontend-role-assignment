@@ -1,5 +1,15 @@
-import './styles.css';
+import "./styles.css";
 
-export default function Button({ text }: { text: string }) {
-    return <button>{text}</button>;
+interface ButtonProps {
+    text: string;
+    color?: string;
+    onClick?: () => void;
+}
+
+export default function Button({ text, color, onClick }: ButtonProps) {
+    return (
+        <button onClick={onClick} style={{ backgroundColor: color }}>
+            {text}
+        </button>
+    );
 }
